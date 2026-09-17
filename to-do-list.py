@@ -19,14 +19,35 @@ schedule_days = list(schedule.keys())
 # print(schedule["Monday"][0]["task"]) # return "example"
 # print(schedule["Monday"][0]["checked"]) # return True
 
-# soon to become function
-# while True:
-# print(f"== {schedule[day]} ==")
-print(f"== {schedule_days[0]} ==")
-displayed_day: str = schedule_days[0]
 
-# iterate through all lists
-i: int = 0
-while i < len(schedule_days):
-    print(schedule[displayed_day][i])
-    i += 1
+while True:
+    print(f"== {schedule_days[0]} ==")
+    displayed_day: str = schedule_days[0]
+
+    def check():
+        if schedule[displayed_day][i]["checked"] == True:
+            return("x")
+        else:
+            return(" ")
+
+    i: int = 0
+    while i < len(schedule_days):
+        print(f"{i + 1}. [{check()}] {schedule[displayed_day][i]['task']}")     # i + 1 so we don't state "0"
+        i += 1
+
+    # now person inputs "1" and makes checked false
+    checkstatus = int(input("Would you like to check / uncheck something?: "))
+
+    def statuscheck(checkstatus):                                               # [checkstatus - 1] because we don't want the possibility of "0"
+        if schedule[displayed_day][checkstatus - 1]["checked"] == True:
+            schedule[displayed_day][checkstatus - 1]["checked"] = False
+            print("Unchecked!")
+        else:
+            schedule[displayed_day][checkstatus - 1]["checked"] = True
+            print("Checked!")
+
+    if checkstatus > 0 and checkstatus <= len(schedule[displayed_day]):         # if it's not 0 (expect 1 and above) and less than or = to length (1 minimum, also bounds)
+        statuscheck(checkstatus)
+    else:
+        print("Doesn't Exist")
+    
