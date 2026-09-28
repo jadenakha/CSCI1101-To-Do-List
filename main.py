@@ -74,15 +74,15 @@ while True:
                 print(f"== {schedule_days[k]} ==")
             print()
             try: # learned try blocks from boot.dev however https://www.w3schools.com/python/python_try_except.asp
-                for i, j in enumerate(schedule[v]):
+                for i, j in enumerate(schedule[v]): # for example schedule["Monday"]. i is the index for each in v (value), j placeholder
                     if schedule[v][i]['checked'] == True:
                         x = "[x]"
                     else:
                         x = "[ ]"
 
-                    print(f"{i + 1}. {x} {schedule[v][i]['task']}")
+                    print(f"{i + 1}. {x} {schedule[v][i]['task']}")  # 1. [ ] task
                 print()
-            except IndexError:
+            except IndexError: # if theres an error and if its an index error then skips over otherwise full error
                 print()
         print("== All Days and Tasks Above ==")
         print()

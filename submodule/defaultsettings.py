@@ -25,7 +25,7 @@ def settingsmenu(printDays, schedule, schedule_days, printToday, togglePrints): 
         addtask.addtoday(printDays, schedule, schedule_days, printToday, togglePrints)
     elif x == "check":
         checktask.taskchecking(printDays, schedule, schedule_days, printToday, togglePrints)
-    elif x == "list":
+    elif x == "list": # toggles the print from default of today to tmrw vise versa
         if togglePrints['view'] == "Today":
             togglePrints['view'] = "Tmrw"
         elif togglePrints['view'] == "Tmrw":

@@ -4,11 +4,11 @@ from submodule import defaultsettings
 def taskchecking(printDays, schedule, schedule_days, printToday, togglePrints):
     checkstatus = str(input("What day would you like to edit the tasks in (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
 
-    if checkstatus not in schedule_days or checkstatus == "exit":
+    if checkstatus not in schedule_days or checkstatus == "exit": # checks if in schedule (day like Monday rejects monday cuz not proper typed) otherwise returns
         print("Day not in Schedule Days! Check caps!")
         defaultsettings.settingsmenu(printDays, schedule, schedule_days, printToday, togglePrints)
 
-    def statuscheck():                                               # [checkstatus - 1] because we don't want the possibility of "0"
+    def statuscheck():                                               # [checkstatus - 1] because we don't want the possibility of "0" even though index starts at 0 we display as 1 starting
         if schedule[checkstatus][modifyCheck - 1]["checked"] == True:
             schedule[checkstatus][modifyCheck - 1]["checked"] = False
             print("Unchecked!")
@@ -22,7 +22,7 @@ def taskchecking(printDays, schedule, schedule_days, printToday, togglePrints):
             statuscheck()
         else:
             raise IndexError
-    except IndexError:
+    except IndexError: # handles task # thing
         print("Not a valid task #")
         print()
         defaultsettings.settingsmenu(printDays, schedule, schedule_days, printToday, togglePrints)
