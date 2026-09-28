@@ -41,24 +41,27 @@ schedule: dict[str, list[str | bool]] = {
 
 schedule_days = list(schedule.keys())
 today = datetime.datetime.now().strftime("%A")
-total_tasks = list(schedule.values())
+
 # print(schedule["Monday"][0]) # {'task': 'example', 'checked': True}
 # print(schedule["Monday"][0]["task"]) # return "example"
 # print(schedule["Monday"][0]["checked"]) # return True
 
+togglePrints: dict[str, str] = {"view": "Today"}
+
 while True:
     # print current day
-    print(f"== Today is: {today} ==")
-    print()
-    try:
-        for key, value in enumerate(schedule[today]):    
-            if schedule[today][key]['checked'] == True:
-                checked = "[x]"
-            else:
-                checked = "[ ]"
-            print(f"{key + 1}. {checked} {schedule[today][key]['task']}")
-    except IndexError:
-        print() # because otherwise theres no index in an empty table
+    def printToday():
+        print(f"== Today is: {today} ==")
+        print()
+        try:
+            for key, value in enumerate(schedule[today]):    
+                if schedule[today][key]['checked'] == True:
+                    checked = "[x]"
+                else:
+                    checked = "[ ]"
+                print(f"{key + 1}. {checked} {schedule[today][key]['task']}")
+        except IndexError:
+            print() # because otherwise theres no index in an empty table
 
     # print all days, list
     def printAllDays():
@@ -83,6 +86,5 @@ while True:
                 print()
         print("== All Days and Tasks Above ==")
         print()
-
-    defaultsettings.settingsmenu(printAllDays, schedule)
+    defaultsettings.settingsmenu(printAllDays, schedule, schedule_days, printToday, togglePrints)
 

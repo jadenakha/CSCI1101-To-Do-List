@@ -11,19 +11,35 @@ https://github.com/jadenakha/CSCI1101-To-Do-List/tree/main
 
 # project map
 
-1. start from main.py
+start from main.py
 import the following from "submodule" folder (https://stackoverflow.com/questions/8953844/import-module-from-subfolder)
 
 -- 
 
 from submodule import addtask
 # addtask.addtoday()
+
+addtask in `submodule` does this:
+-> takes input for day (caps sensitive)
+-> asks what you would like to add
+-> if the date for input day is not apart of list then return user back to menu
+
 from submodule import defaultsettings
 # defaultsettings.settingsmenu()
+
+defaultsettings in `submodule` does:
+-> essentially the loop back for choosing a task in submodule or other thing in main
+-> basically interaction layer
+
 from submodule import checktask
 # checktask.taskchecking()
 
+checktask in `submodule` does:
+-> takes input of day
+-> that day will usually have tasks
+
 --
+
 
 
 
