@@ -42,6 +42,33 @@ today: str = datetime.datetime.now().strftime("%A") # returns today as string li
 
 togglePrints: dict[str, str] = {"view": "Today"}
 
+def printChecks(keyValue: str) -> str:
+
+    """
+    Function for enumerating each day's tasks and current status on the check mark.
+    "j" goes unused so that we can pull just the index value of schedule rather than
+    the pure value of the index. 
+
+    Parameters
+    ----------
+    keyValue : str
+        Describes the value from the initial for loop. For example, in all for loops
+        that this is nested under, "for k, v in enumerate(schedule_days):"
+        where the v: str variable is the initial key Day, like "Sunday".
+
+    Returns
+    -------
+    str
+        Returns the status of each day's task as:
+        print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")
+    """
+    for key, value in enumerate(schedule[keyValue]): # for example schedule["Monday"]. i is the index for each in v (value)
+        if schedule[keyValue][key]['checked'] == True:
+            checked = "[x]"
+        else:
+            checked = "[ ]"
+        print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")  # 1. [ ] task
+
 # print current day
 def printToday() -> str:
     """
@@ -53,17 +80,14 @@ def printToday() -> str:
     """
     print(f"== Today is: {today} ==")
     print()
+
     try:
-        for key, value in enumerate(schedule[today]):
-            if schedule[today][key]['checked'] == True:
-                checked = "[x]"
-            else:
-                checked = "[ ]"
-            print(f"{key + 1}. {checked} {schedule[today][key]['task']}")
+        printChecks(today)
     except IndexError:
         print() # because otherwise theres no index in an empty table
 
 # print all days, list
+
 def printAllDays() -> str:
     """
     First enumerates through schedule_days which is simplified to just return keys, or the weekdays.
@@ -80,15 +104,9 @@ def printAllDays() -> str:
         else:
             print(f"== {schedule_days[k]} ==")
         print()
-        try: 
-            for i, j in enumerate(schedule[v]): # for example schedule["Monday"]. i is the index for each in v (value)
-                if schedule[v][i]['checked'] == True:
-                    x = "[x]"
-                else:
-                    x = "[ ]"
 
-                print(f"{i + 1}. {x} {schedule[v][i]['task']}")  # 1. [ ] task
-            print()
+        try: 
+            printChecks(v)
         except IndexError: # if theres an error and if its an index error then skips over otherwise full error
             print()
 
