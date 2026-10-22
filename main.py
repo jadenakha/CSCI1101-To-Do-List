@@ -20,7 +20,7 @@ import datetime
 
 # ===
 
-schedule: dict[str, list[str | bool]] = {
+schedule: dict[str, list[dict[str, str | bool]]] = {
     "Sunday": [
         {"task": "example", "checked": True},
         {"task": "example", "checked": False}                                     
