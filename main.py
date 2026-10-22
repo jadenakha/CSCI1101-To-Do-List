@@ -9,6 +9,8 @@ def clearconsole():
 
 # https://stackoverflow.com/questions/8953844/import-module-from-subfolder
 
+from submodule import colors
+# colors.BLUE
 from submodule import addtask
 # addtask.addtoday()
 from submodule import checktask
@@ -110,7 +112,7 @@ def settingsmenu() -> str:
     print()
     print("What would you like to try and do?")
     print()
-    print("'Add' - Adds a new task to a specified day.")
+    print("Add - Adds a new task to a specified day.")
     print("'Check' - Modifies a check on a task from [X] to [ ], etc.")
     print("'List' Toggles between printing today (default) or the entire list.")
     print()
