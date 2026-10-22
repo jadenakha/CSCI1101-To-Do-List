@@ -13,7 +13,6 @@ from submodule import addtask
 # addtask.addtoday()
 from submodule import checktask
 # checktask.taskchecking()
-
 # https://www.w3schools.com/python/python_datetime.asp
 
 import datetime
