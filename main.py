@@ -65,9 +65,9 @@ def printChecks(keyValue: str) -> str:
     """
     for key, value in enumerate(schedule[keyValue]): # for example schedule["Monday"]. i is the index for each in v (value)
         if schedule[keyValue][key]['checked'] == True:
-            checked = "[x]"
+            checked = f"{colors.GREEN}[x]{colors.RESET}"
         else:
-            checked = "[ ]"
+            checked = f"{colors.RED}[ ]{colors.RESET}"
         print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")  # 1. [ ] task
 
 # print current day
