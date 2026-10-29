@@ -73,7 +73,7 @@ def printChecks(keyValue: str) -> str:
         due_date = schedule[keyValue][key].get("due_date")
 
         if due_date and due_date != "none":
-            print(f"   Due: {due_date}")
+            print(f"{colors.bold}Due: {due_date}{colors.reset}")
     
 # print current day
 def printToday() -> str:

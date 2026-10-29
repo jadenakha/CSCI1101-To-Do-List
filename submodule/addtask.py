@@ -24,15 +24,15 @@ def addTask(schedule):
         return
 
     taskName = str(input(f"What task would you like to add for {addnew}?: "))
-    while True:
-        due_date = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
-        if due_date == "none":
-            break
-        try:
-            datetime.datetime.strptime(due_date, "%m/%d/%Y")
-            break
-        except ValueError:
-            print("Invalid date format! Please use YYYY-DD-MM.")
+ 
+    due_date: str = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
+
+    if due_date == "none":
+        return
+    elif due_date != datetime.datetime.strptime(due_date, "%m/%d/%Y"):
+        print("Invalid date format! Please use MM-DD-YYYY.")
+        return
+
     try:
         schedule[addnew].append({"task": taskName, "checked": False}) # Appends
         schedule[addnew][-1]["due_date"] = due_date
