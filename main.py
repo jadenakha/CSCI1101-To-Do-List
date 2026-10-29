@@ -39,7 +39,6 @@ schedule: dict[str, list[dict[str, str | bool]]] = {
 }
 
 today: str = datetime.datetime.now().strftime("%A") # returns today as string like "Wednesday"
-
 togglePrints: dict[str, str] = {"view": "Today"}
 
 def printChecks(selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]]]) -> None:
@@ -65,25 +64,13 @@ def printChecks(selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]
 
     for key, value in enumerate(dataDict[selectedDay]): # for example schedule["Monday"]. i is the index for each in v (value)
         if dataDict[selectedDay][key]['checked'] is True:
-            checked = f"{colors.GREEN}[x]{colors.RESET}"
-
-    Returns
-    -------
-    str
-        Returns the status of each day's task as:
-        print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")
-    """
-    for key, value in enumerate(schedule[keyValue]): # for example schedule["Monday"]. i is the index for each in v (value)
-        if schedule[keyValue][key]['checked'] == True:
             checked = f"{colors.green}[x]{colors.reset}"
         else:
-            checked = f"{colors.RED}[ ]{colors.RESET}"
+            checked = f"{colors.red}[ ]{colors.reset}"
+    
         print(f"{key + 1}. {checked} {dataDict[selectedDay][key]['task']}")  # 1. [ ] task
 
-            checked = f"{colors.red}[ ]{colors.reset}"
-        print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")  # 1. [ ] task
-
-        due_date = schedule[keyValue][key].get("due_date")
+        due_date = dataDict[selectedDay][key].get("due_date")
 
         if due_date and due_date != "none":
             print(f"{colors.bold}Due: {due_date}{colors.reset}")
@@ -148,21 +135,7 @@ def settingsmenu() -> None:
     Normal settings menu print. Able to be reused and easily modified
     for any settings / options available.
     """
-    print("'Add' - Adds a new task to a specified day.")
-    print("'Check' - Modifies a check on a task from [X] to [ ], etc.")
-    print("'List' Toggles between printing today (default) or the entire list.")
-    Normal settings menu. Before I used to set a temporary value X, but realized
-    I could have just returned it in the function. 
 
-    Returns
-    -------
-    x
-        X initializes input that is then stripped and lowercase so it can be consumed
-        as something thats lowercase
-    """
-    print()
-    print("What would you like to try and do?")
-    print()
     print(f"'{colors.soft_purple}Add{colors.reset}' - {colors.chiffon_yellow}Adds a new task to a specified day.{colors.reset}")
     print(f"'{colors.pale_green}Check{colors.reset}' - {colors.chiffon_yellow}Modifies a check on a task from [X] to [ ], etc.{colors.reset}")
     print(f"'{colors.pastel_blue}List{colors.reset}' - {colors.chiffon_yellow}Toggles between printing today (default) or the entire list.{colors.reset}")
