@@ -1,3 +1,5 @@
+import datetime
+
 def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> str:
 
     """
@@ -22,9 +24,22 @@ def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> str:
         elif addnew == "exit":
             return
 
-        taskName = str(input(f"What task would you like to add for {addnew}?: "))
+    taskName = str(input(f"What task would you like to add for {addnew}?: "))
+ 
+    due_date: str = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
 
+    if due_date == "none":
+        return
+    elif due_date != datetime.datetime.strptime(due_date, "%m/%d/%Y"):
+        print("Invalid date format! Please use MM-DD-YYYY.")
+        return
+
+    try:
         schedule[addnew].append({"task": taskName, "checked": False}) # Appends
-        return f"New task: {taskName} is added onto {addnew}!"
+        schedule[addnew][-1]["due_date"] = due_date
+    except: # If there's any error notify in case something is bad with something but doesnt break app here 
+        print("Error?")
+        print()
+        return
 
-
+    
