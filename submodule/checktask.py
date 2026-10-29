@@ -34,7 +34,6 @@ def taskchecking(schedule: dict[str, list[str | bool]]):
         else:
             schedule[checkstatus][modifyCheck - 1]["checked"] = True
             print("Checked!")
-
     try:
         modifyCheck = int(input("What task would you like to check or uncheck from that day? "))
         if modifyCheck > 0 and modifyCheck <= len(schedule[checkstatus]): # if it's not 0 (expect 1 and above) and less than or = to length (1 minimum, also bounds)

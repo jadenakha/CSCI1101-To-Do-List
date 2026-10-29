@@ -1,11 +1,11 @@
 # Text Format
-RESET: str = "\033[0m"
-BOLD: str = "\033[1m"
-UNDERLINE: str = "\033[4m"
+reset: str = "\033[0m"
+bold: str = "\033[1m"
+underline: str = "\033[4m"
 
 # Text Colors
-RED: str = "\033[31m"
-GREEN: str = "\033[32m"
-YELLOW: str = "\033[33m"
-BLUE: str = "\033[34m"
-CYAN: str = "\033[36m"
+red: str = "\033[31m"
+green: str = "\033[32m"
+yellow: str = "\033[33m"
+blue: str = "\033[34m"
+cyan: str = "\033[36m"

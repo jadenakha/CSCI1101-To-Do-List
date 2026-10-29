@@ -10,7 +10,7 @@ def clearconsole():
 # https://stackoverflow.com/questions/8953844/import-module-from-subfolder
 
 from submodule import colors
-# colors.BLUE
+# colors.blue
 from submodule import addtask
 # addtask.addtoday()
 from submodule import checktask
@@ -31,7 +31,7 @@ schedule: dict[str, list[dict[str, str | bool]]] = {
         {"task": "example", "checked": True},
         {"task": "example", "checked": False}                                     
     ],
-    "Tuesday": [],
+    f"{colors.underline}Tuesday{colors.reset}": [],
     "Wednesday": [],
     "Thursday": [],
     "Friday": [],
@@ -65,9 +65,9 @@ def printChecks(keyValue: str) -> str:
     """
     for key, value in enumerate(schedule[keyValue]): # for example schedule["Monday"]. i is the index for each in v (value)
         if schedule[keyValue][key]['checked'] == True:
-            checked = f"{colors.GREEN}[x]{colors.RESET}"
+            checked = f"{colors.green}[x]{colors.reset}"
         else:
-            checked = f"{colors.RED}[ ]{colors.RESET}"
+            checked = f"{colors.red}[ ]{colors.reset}"
         print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")  # 1. [ ] task
 
         due_date = schedule[keyValue][key].get("due_date")
@@ -134,7 +134,7 @@ def settingsmenu() -> str:
     print()
     print("What would you like to try and do?")
     print()
-    print("Add - Adds a new task to a specified day.")
+    print("'Add' - Adds a new task to a specified day.")
     print("'Check' - Modifies a check on a task from [X] to [ ], etc.")
     print("'List' Toggles between printing today (default) or the entire list.")
     print()
