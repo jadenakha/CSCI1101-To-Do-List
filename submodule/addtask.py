@@ -1,4 +1,5 @@
-def addTask(schedule):
+def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> str:
+
     """
     Essentially, if you want to add a task to a day you
     - Declare what day you want to add to first
@@ -7,26 +8,23 @@ def addTask(schedule):
 
     Parameters
     ----------
-    schedule: dict[str, list[str | bool]]
+    schedule: dict[str, list[dict[str, str | bool]]]
         Original schedule in main imported basically. Since that's all we kinda used anyways in the func
-
-    Returns
-    -------
-    Basically returns nothing, because then the loop in main essentailly continues on 
     """
+    while True:
+        addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
 
-    addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
+        if addnew not in schedule: # Checks if its a valid typed day
+            print()
+            print("Not a valid day!") # id rather not raise an error and break the loop, just move them back
+            print()
+            continue
+        elif addnew == "exit":
+            return
 
-    if addnew not in schedule: # Checks if its a valid typed day
-        print("Not a valid day!") # id rather not raise an error and break the loop, just move them back
-        return
-    elif addnew == "exit":
-        return
+        taskName = str(input(f"What task would you like to add for {addnew}?: "))
 
-    taskName = str(input(f"What task would you like to add for {addnew}?: "))
-    try:
         schedule[addnew].append({"task": taskName, "checked": False}) # Appends
-    except: # If there's any error notify in case something is bad with something but doesnt break app here 
-        print("Error?")
-        print()
-        return
+        return f"New task: {taskName} is added onto {addnew}!"
+
+
