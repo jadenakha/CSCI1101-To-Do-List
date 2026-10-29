@@ -70,6 +70,11 @@ def printChecks(keyValue: str) -> str:
             checked = f"{colors.RED}[ ]{colors.RESET}"
         print(f"{key + 1}. {checked} {schedule[keyValue][key]['task']}")  # 1. [ ] task
 
+        due_date = schedule[keyValue][key].get("due_date")
+
+        if due_date and due_date != "none":
+            print(f"   Due: {due_date}")
+    
 # print current day
 def printToday() -> str:
     """

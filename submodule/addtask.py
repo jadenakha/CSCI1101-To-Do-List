@@ -14,7 +14,7 @@ def addTask(schedule):
     -------
     Basically returns nothing, because then the loop in main essentailly continues on 
     """
-
+    import datetime
     addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
 
     if addnew not in schedule: # Checks if its a valid typed day
@@ -24,9 +24,21 @@ def addTask(schedule):
         return
 
     taskName = str(input(f"What task would you like to add for {addnew}?: "))
+    while True:
+        due_date = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
+        if due_date == "none":
+            break
+        try:
+            datetime.datetime.strptime(due_date, "%m/%d/%Y")
+            break
+        except ValueError:
+            print("Invalid date format! Please use YYYY-DD-MM.")
     try:
         schedule[addnew].append({"task": taskName, "checked": False}) # Appends
+        schedule[addnew][-1]["due_date"] = due_date
     except: # If there's any error notify in case something is bad with something but doesnt break app here 
         print("Error?")
         print()
         return
+
+    
