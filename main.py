@@ -10,7 +10,7 @@ def clearconsole():
 # https://stackoverflow.com/questions/8953844/import-module-from-subfolder
 
 from submodule import colors
-# colors.blue
+# colors.BLUE
 from submodule import addtask
 # addtask.addtoday()
 from submodule import checktask
@@ -31,7 +31,7 @@ schedule: dict[str, list[dict[str, str | bool]]] = {
         {"task": "example", "checked": True},
         {"task": "example", "checked": False}                                     
     ],
-    f"{colors.underline}Tuesday{colors.reset}": [],
+    "Tuesday": [],
     "Wednesday": [],
     "Thursday": [],
     "Friday": [],
@@ -134,9 +134,9 @@ def settingsmenu() -> str:
     print()
     print("What would you like to try and do?")
     print()
-    print("'Add' - Adds a new task to a specified day.")
-    print("'Check' - Modifies a check on a task from [X] to [ ], etc.")
-    print("'List' Toggles between printing today (default) or the entire list.")
+    print(f"'{colors.soft_purple}Add{colors.reset}' - {colors.chiffon_yellow}Adds a new task to a specified day.{colors.reset}")
+    print(f"'{colors.pale_green}Check{colors.reset}' - {colors.chiffon_yellow}Modifies a check on a task from [X] to [ ], etc.{colors.reset}")
+    print(f"'{colors.pastel_blue}List{colors.reset}' - {colors.chiffon_yellow}Toggles between printing today (default) or the entire list.{colors.reset}")
     print()
 
     x = str(input().strip().lower())

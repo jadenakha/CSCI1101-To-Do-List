@@ -1,21 +1,20 @@
-"""
-Essentially, if you want to add a task to a day you
-- Declare what day you want to add to first
-- Check if it's okay
-- If it's fine, 
-
-Parameters
-----------
-schedule: dict[str, list[str | bool]]
-    Original schedule in main imported basically. Since that's all we kinda used anyways in the func
-
-Returns
--------
-Basically returns nothing, because then the loop in main essentially continues on 
-"""
-import datetime
-
 def addTask(schedule):
+    """
+    Essentially, if you want to add a task to a day you
+    - Declare what day you want to add to first
+    - Check if it's okay
+    - If it's fine, 
+
+    Parameters
+    ----------
+    schedule: dict[str, list[str | bool]]
+        Original schedule in main imported basically. Since that's all we kinda used anyways in the func
+
+    Returns
+    -------
+    Basically returns nothing, because then the loop in main essentailly continues on 
+    """
+    import datetime
     addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
 
     if addnew not in schedule: # Checks if its a valid typed day
