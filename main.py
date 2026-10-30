@@ -110,13 +110,13 @@ def printAllDays() -> str:
         else:
             print(f"== {schedule_days[k]} ==")
         print()
-
+        print("tasks for this day:", len(schedule[v]))
         try: 
             printChecks(v)
         except IndexError: # if theres an error and if its an index error then skips over otherwise full error
             print()
 
-    print("== All Days and Tasks Above ==")
+    print("Total tasks for the week:", sum(len(tasks) for tasks in schedule.values()))
     print()
 
 
@@ -137,13 +137,25 @@ def settingsmenu() -> str:
     print("'Add' - Adds a new task to a specified day.")
     print("'Check' - Modifies a check on a task from [X] to [ ], etc.")
     print("'List' Toggles between printing today (default) or the entire list.")
+    print("'count' - Shows the total tasks for the week")
     print()
 
     x = str(input().strip().lower())
     return x
 
+# Count all the tasks for the week
+def countTasks(schedule):
+    total = 0
 
+    # Go through each day and count the tasks
+    for day in schedule:
+        total += len(schedule[day])
+
+    # Print the total number of tasks
+    print("Total tasks:", total)
+    input("Press Enter to continue...")
 while True:
+    
     clearconsole()
     if togglePrints["view"] == "Today":
         printToday()
@@ -161,6 +173,8 @@ while True:
             togglePrints['view'] = "Tmrw"
         elif togglePrints['view'] == "Tmrw":
             togglePrints['view'] = "Today"
+    elif choice == "count":
+        countTasks(schedule)
     else:
         print()
         print("Not available!")
