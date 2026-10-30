@@ -1,39 +1,44 @@
-"""
-Essentially, if you want to add a task to a day you
-- Declare what day you want to add to first
-- Check if it's okay
-- If it's fine, 
-
-Parameters
-----------
-schedule: dict[str, list[str | bool]]
-    Original schedule in main imported basically. Since that's all we kinda used anyways in the func
-
-Returns
--------
-Basically returns nothing, because then the loop in main essentially continues on 
-"""
 import datetime
 
-def addTask(schedule):
-    addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
+def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> str:
 
-    if addnew not in schedule: # Checks if its a valid typed day
-        print("Not a valid day!") # id rather not raise an error and break the loop, just move them back
-        return
-    elif addnew == "exit":
-        return
+    """
+    Essentially, if you want to add a task to a day you
+    - Declare what day you want to add to first
+    - Check if it's okay
+    - If it's fine, 
+
+    Parameters
+    ----------
+    schedule: dict[str, list[dict[str, str | bool]]]
+        Original schedule in main imported basically. Since that's all we kinda used anyways in the func
+    """
+
+    while True:
+        addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
+
+        if addnew in schedule:
+            break
+        if addnew not in schedule: # Checks if its a valid typed day
+            print()
+            print("Not a valid day!") # id rather not raise an error and break the loop, just move them back
+            print()
+            continue
+        elif addnew == "exit":
+            return
+        elif addnew != "exit":
+            continue
 
     taskName = str(input(f"What task would you like to add for {addnew}?: "))
-    while True:
-        due_date = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
-        if due_date == "none":
-            break
-        try:
-            datetime.datetime.strptime(due_date, "%m/%d/%Y")
-            break
-        except ValueError:
-            print("Invalid date format! Please use YYYY-DD-MM.")
+ 
+    due_date: str = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
+
+    if due_date == "none":
+        return
+    elif due_date != datetime.datetime.strptime(due_date, "%m/%d/%Y"):
+        print("Invalid date format! Please use MM-DD-YYYY.")
+        return
+
     try:
         schedule[addnew].append({"task": taskName, "checked": False}) # Appends
         schedule[addnew][-1]["due_date"] = due_date
