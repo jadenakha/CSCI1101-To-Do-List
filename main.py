@@ -39,7 +39,6 @@ schedule: dict[str, list[dict[str, str | bool]]] = {
 }
 
 today: str = datetime.datetime.now().strftime("%A") # returns today as string like "Wednesday"
-
 togglePrints: dict[str, str] = {"view": "Today"}
 
 def printChecks(selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]]]) -> None:
@@ -71,7 +70,7 @@ def printChecks(selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]
     
         print(f"{key + 1}. {checked} {dataDict[selectedDay][key]['task']}")  # 1. [ ] task
 
-        due_date = schedule[dataDict[selectedDay]][key].get("due_date")
+        due_date = dataDict[selectedDay][key].get("due_date")
 
         if due_date and due_date != "none":
             print(f"{colors.bold}Due: {due_date}{colors.reset}")
