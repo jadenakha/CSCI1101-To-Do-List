@@ -76,7 +76,7 @@ def printChecks(selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]
             print(f"{colors.bold}Due: {due_date}{colors.reset}")
     
 # print current day
-def printSelectedDay(typeOfDay: str, selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]]]) -> None:
+def printSelectedDay(typeOfDay: str | None, selectedDay: str, dataDict: dict[str, list[dict[str, str | bool]]]) -> None:
 
     """
     Isolates an individual day to expand it's tasks and statuses.
@@ -90,15 +90,20 @@ def printSelectedDay(typeOfDay: str, selectedDay: str, dataDict: dict[str, list[
     dataDict : dict[str, list[dict[str, str  |  bool]]]
         Expects that the original dictionary is formatted this way. Done to contain
         the scope within the function, or modularity.
-    typeOfDay : str
+    typeOfDay : str | None
         So that the type of day becomes malleable. Can be "today" or can be "selected day"
-        or any other declared thing.
+        or any other declared thing. 
+        However, initial can be type none and if none then it prints the standard "selectedDay" only
     """
-
-    print(f"== {typeOfDay} is: {selectedDay} ==")
-    print()
+    if type(typeOfDay) == str:
+        print(f"== {typeOfDay} is: {selectedDay} ==")
+        print()
+    else:
+        print(f"== {selectedDay} ==")
+        print()
 
     printChecks(selectedDay, dataDict)
+    print()
 
 # print all days, list
 
@@ -120,14 +125,11 @@ def printAllDays(dataDict: dict[str, list[dict[str, str | bool]]]) -> None:
 
     for key, value in enumerate(schedule_days):
         if schedule_days[key] == today: # ONLY for today
-            print(f"== Today: {schedule_days[key]} ==")
+            printSelectedDay("Today", schedule_days[key], dataDict)
         else:
-            print(f"== {schedule_days[key]} ==")
-        print()
-        printChecks(value, dataDict)
-        print()
+            printSelectedDay(None, schedule_days[key], dataDict)
 
-    print("Total tasks for the week:", sum(len(tasks) for tasks in schedule.values()))
+    print("Total tasks for the week:", sum(len(tasks) for tasks in dataDict.values()))
     print()
 
 def settingsmenu() -> None:
@@ -143,7 +145,6 @@ def settingsmenu() -> None:
 
 if __name__ == "__main__":
     while True:
-        clearconsole()
         if togglePrints["view"] == "Today":
             printSelectedDay("Today", today, schedule)
         else:

@@ -1,12 +1,12 @@
 import datetime
 
-def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> str:
+def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> None:
 
     """
     Essentially, if you want to add a task to a day you
     - Declare what day you want to add to first
-    - Check if it's okay
-    - If it's fine, 
+    - Check if it's okay and in schedule
+    - Ask for a potential due date / note
 
     Parameters
     ----------
@@ -15,36 +15,26 @@ def addTask(schedule: dict[str, list[dict[str, str | bool]]]) -> str:
     """
 
     while True:
-        addnew = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
+        addnew: str = str(input("To what day would you like to add (caps sensitive, like 'Monday')? Type 'exit' to return back to options: "))
 
-        if addnew in schedule:
-            break
-        if addnew not in schedule: # Checks if its a valid typed day
-            print()
-            print("Not a valid day!") # id rather not raise an error and break the loop, just move them back
-            print()
-            continue
-        elif addnew == "exit":
+        if addnew == "exit":
             return
-        elif addnew != "exit":
-            continue
+        elif addnew in schedule: # Checks if its a valid typed day
+            break
+        else:
+            print("Not a valid option!")
 
-    taskName = str(input(f"What task would you like to add for {addnew}?: "))
+
+    taskName: str = input(f"What task would you like to add for {addnew}?: ")
  
     due_date: str = input("Enter a due date (MM/DD/YYYY) or type 'none': ")
 
-    if due_date == "none":
-        return
-    elif due_date != datetime.datetime.strptime(due_date, "%m/%d/%Y"):
-        print("Invalid date format! Please use MM-DD-YYYY.")
-        return
+    if due_date != "none":
+        try:
+            datetime.datetime.strptime(due_date, "%m/%d/%Y")
+        except ValueError: # because we only expect mm/dd/yyyy, not 01-10-1010
+            print("Invalid date! Please use MM/DD/YYYY.")
+            return
 
-    try:
-        schedule[addnew].append({"task": taskName, "checked": False}) # Appends
-        schedule[addnew][-1]["due_date"] = due_date
-    except: # If there's any error notify in case something is bad with something but doesnt break app here 
-        print("Error?")
-        print()
-        return
-
-    
+    schedule[addnew].append({"task": taskName, "checked": False}) # Appends
+    schedule[addnew][-1]["due_date"] = due_date

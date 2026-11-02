@@ -31,24 +31,21 @@ def taskchecking(schedule: dict[str, list[dict[str, str | bool]]]):
     while True:
         checkstatus = str(input("What day would you like to edit the tasks in (caps sensitive, like 'Monday')? Type 'exit' to return back to the menu. "))
 
-        if checkstatus in schedule:
-            break
-        if checkstatus not in schedule: # checks if in schedule (day like Monday rejects monday cuz not proper typed) otherwise returns
-            print("Day not in schedule! Check caps!")
-            continue
-        elif checkstatus == "exit":
+        if checkstatus == "exit":
             return
-        elif checkstatus != "exit":
-            continue
+        elif checkstatus in schedule: 
+            break
+        else:
+            print("Not a valid option!")
 
-
-        while True:
-            modifyCheck: int | str = (input("What task would you like to check or uncheck from that day? Type 'exit' to return back to the menu. "))
+    while True:
+        try:
+            modifyCheck: int = int(input("What task would you like to check or uncheck from that day? Or type anything to exit."))
             if modifyCheck > 0 and modifyCheck <= len(schedule[checkstatus]): # if it's not 0 (expect 1 and above) and less than or = to length (1 minimum, also bounds)
                 statuscheck()
                 continue
-            elif modifyCheck == "exit":
-                return
-            elif modifyCheck != "exit":
+            else:
+                print("The check was not found! Please try again.")
                 continue
- 
+        except ValueError: # Only expects int
+            return
